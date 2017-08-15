@@ -24,6 +24,7 @@
             });
             --------------------
 
+    node server.js // run server
 
 # 3. Use Babel to automaticly compile JSX to JS files
 
@@ -47,4 +48,3 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.13.0/polyfill.js"></script>
 
-    
