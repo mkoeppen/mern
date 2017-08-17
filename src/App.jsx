@@ -48,8 +48,15 @@ class IssueRow extends React.Component {
 }
 
 IssueRow.propTypes = {
-    issue: React.PropTypes.number.isRequired,
-    issue_title: React.PropTypes.string
+    issue: React.PropTypes.shape({
+        id: React.PropTypes.number.isRequired,
+        status: React.PropTypes.string,
+        owner: React.PropTypes.string,
+        created: React.PropTypes.Date,
+        effort: React.PropTypes.number,
+        completionDate: React.PropTypes.Date,
+        title: React.PropTypes.string
+    })
 }
 
 IssueRow.defaultProps = {
@@ -88,13 +95,47 @@ class IssueAdd extends React.Component {
 }
 
 class IssueList extends React.Component {
+
+    constructor() {
+        super();
+        this.state = { issues: [] };
+        setTimeout(this.createTestIssue.bind(this), 2000);
+    }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
+        setTimeout(() => {
+            this.setState({ issues: issues });
+        }, 500);
+    }
+
+    createIssue(newIssue) {
+        const newIssues = this.state.issues.slice();
+        newIssue.id = this.state.issues.length + 1;
+        newIssues.push(newIssue);
+        this.setState({ issues: newIssues });
+    } 
+
+    createTestIssue() {
+        this.createIssue({
+            status: "New",
+            owner: "Pieta",
+            created: new Date(),
+            title: "Completion date should be optional",
+            effort: 5
+        });
+    }
+
     render() {
         return (
             <div>
                 <h1>Issue Tracker</h1>
                 <IssueFilter />
                 <hr />
-                <IssueTable issues={issues} />
+                <IssueTable issues={this.state.issues} />
                 <hr />
                 <IssueAdd />
             </div>
