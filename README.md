@@ -48,3 +48,20 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.13.0/polyfill.js"></script>
 
+
+# Watch on server.js changes: (for development) 
+
+    npm install nodemon --save-dev
+
+    adjust package.json:
+
+    ...
+    "scripts: {
+        "start": "nodemon -w server.js server.js",
+    ...
+
+# Always running server on productive
+
+    npm install forever
+
+    TODO... read something about this package
